@@ -3,6 +3,7 @@ var hours = $(".hour");
 var buttons = $("button");
 
 var today;
+var hour;
 var time;
 var currTimeBlock;
 var planned;
@@ -25,6 +26,8 @@ function colorBlock() {
 
     // current hour
     time = moment(moment(), "hour");
+    hour = moment().format("HHA");
+    console.log(hour)
 
     hours.each(function () {
 
@@ -43,11 +46,11 @@ function colorBlock() {
         }
 
         // color code when time block is in the current hour
-        else if (time === currTimeBlock) {
+        if (hour === currTimeBlock) {
             $(this).parent().addClass("present");
         }
         // color code when time block is in the future
-        else {
+        if (time.isBefore(moment(currTimeBlock, "hour"))) {
             $(this).parent().addClass("future");
         }
     })
